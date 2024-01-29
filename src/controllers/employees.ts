@@ -14,7 +14,7 @@ export const getAllEmployees = async (req: express.Request, res: express.Respons
 }
 
 export const addNewEmployee = async (req: express.Request, res: express.Response) => {
-    try {
+    try {      
         const { name, title, points } = req.body;
 
         const employee: Employee = new Employee(name, title, points);

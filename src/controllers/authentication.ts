@@ -1,7 +1,7 @@
 import express from "express";
 import { authentication, random } from "../helpers";
 
-import { createUser, getUserByEmail, getUserByUsername } from "../db/users";
+import { createUser, getUserByEmail, getUserBySessionToken, getUserByUsername } from "../db/users";
 
 export const login = async (req: express.Request, res: express.Response) => {
     try {
@@ -64,6 +64,24 @@ export const register = async (req: express.Request, res: express.Response) => {
         });
 
         return res.status(200).json({ message: `User ${user.username} created successfully` });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: "Internal server error." });
+    }
+}
+
+export const isAuthenticated = async (req: express.Request, res: express.Response) => {
+
+    try {
+        const token = req.cookies.AUTH;
+        if (token) {
+            const existingSession = await getUserBySessionToken(token);
+            if (existingSession) {
+                return res.status(200).json({ status: true });
+            }
+        }
+        return res.status(401).json({ status: false });
 
     } catch (error) {
         console.log(error);

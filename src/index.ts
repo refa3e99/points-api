@@ -16,7 +16,8 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(cors({
-    credentials : true,
+    credentials: true,
+    origin: 'http://localhost:4200',
 }));
 
 app.use(compression());
