@@ -23,14 +23,8 @@ export const login = async (req: express.Request, res: express.Response) => {
         user.authentication.sessionToken = authentication(salt, user._id.toString());
 
         await user.save();
-        res.cookie('AUTH', user.authentication.sessionToken,
-            {
-                domain: 'onrender.com',
-                path: '/',
-                secure: true,
-                sameSite: "none"
-            });
-        return res.status(200).json({ message: "Logged in successfully" });
+        // res.cookie('AUTH', user.authentication.sessionToken);
+        return res.status(200).json({ message: "Logged in successfully", cookie: { 'AUTH': user.authentication.sessionToken } });
 
     } catch (error) {
         console.log(error);

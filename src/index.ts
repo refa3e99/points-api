@@ -17,7 +17,7 @@ const port = process.env.PORT;
 
 app.use(cors({
     credentials: true,
-    origin: 'https://points-35d3d.web.app'
+    origin: ['https://points-35d3d.web.app', 'http://localhost:4200'],
 }));
 
 app.use(compression());
