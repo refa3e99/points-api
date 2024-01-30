@@ -74,9 +74,21 @@ export const register = async (req: express.Request, res: express.Response) => {
 export const isAuthenticated = async (req: express.Request, res: express.Response) => {
 
     try {
-        const token = req.cookies.AUTH;
-        if (token) {
+        // const token = req.cookies.AUTH;
+        // console.log(token);
+
+        // if (token) {
+        //     const existingSession = await getUserBySessionToken(token);
+        //     if (existingSession) {
+        //         return res.status(200).json({ status: true });
+        //     }
+        // }
+        const authHeader = req.headers['authorization'];
+
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+            const token = authHeader.substring(7);
             const existingSession = await getUserBySessionToken(token);
+
             if (existingSession) {
                 return res.status(200).json({ status: true });
             }
