@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import router from "./router";
 import dotenv from 'dotenv';
 import { seedData } from "./db/seedData";
+import { environment } from "environment/env";
 
 
 dotenv.config();
@@ -17,8 +18,7 @@ const port = process.env.PORT;
 
 app.use(cors({
     credentials: true,
-    // origin: 'https://points-35d3d.web.app',
-    origin: 'http://localhost:4200'
+    origin: environment.clientUrl
 }));
 
 app.use(compression());
