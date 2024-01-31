@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import router from "./router";
 import dotenv from 'dotenv';
 import { seedData } from "./db/seedData";
-import { environment } from "environment/env";
+import { environment } from "./environment/env";
 
 
 dotenv.config();
